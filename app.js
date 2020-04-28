@@ -4,21 +4,14 @@ var http=require("http");
 var ejs=require("ejs");
 var app= express();
 var container=require("./container");
-var mongoose=require("mongoose");
-var _ =require("lodash");
-const PORT=process.env.PORT || 5000;
-require('dotenv').config();
+const PORT=process.env.PORT || 8080;
 container.resolve(function(users){
-    mongoose.connect(process.env.DB_CONNECT,{ useNewUrlParser: true ,useUnifiedTopology: true},function(){
-        console.log("DB has succesfully connected");
-    });
-    mongoose.set('useCreateIndex', true);
     var app=SetExpress();
     function SetExpress(){
         var app=express();
         var server=http.createServer(app);
         server.listen(PORT,function(){
-            console.log("server is running on port 5000");
+            console.log("server is running on port "+PORT);
         })
         Configure(app);
         var router=require("express-promise-router")();
@@ -30,6 +23,5 @@ container.resolve(function(users){
         app.set("view engine","ejs");
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: true }));
-        app.locals._=_;
     }
 })
