@@ -4,16 +4,19 @@ var http=require("http");
 var ejs=require("ejs");
 var app= express();
 var container=require("./container");
+var socketIO=require("socket.io");
 const PORT=process.env.PORT || 8080;
 container.resolve(function(users){
     var app=SetExpress();
     function SetExpress(){
         var app=express();
         var server=http.createServer(app);
+        var io=socketIO(server);
         server.listen(PORT,function(){
             console.log("server is running on port "+PORT);
         })
         Configure(app);
+        require('./socket/voice-recog')(io);
         var router=require("express-promise-router")();
         users.SetRouting(router);
         app.use(router);
