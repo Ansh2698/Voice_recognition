@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -16,8 +16,17 @@
   <body>
     <section>
       <h1>RedPositive Voice Recognition</h1>
-      <button><i class="fa fa-microphone"></i></button>
-
+	  <button><i class="fa fa-microphone"></i></button>
+	<div class="lang-selector">
+		<label for="lang">Choose a language:</label>
+	
+		<select id="lang">
+			<option value="en-us">English - United States</option>
+			<option value="hi">Hindi</option>
+			<option value="el">Greek</option>
+			<option value="te">Telugu</option>
+		</select>
+	</div>
       <div>
           <p>You said: <em class="output-you">...</em></p>
       </div>

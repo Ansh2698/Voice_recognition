@@ -14,9 +14,10 @@ $(document).ready(function(){
     var speechrecognitiongrammarList=new SpeechGrammarList();
     speechrecognitiongrammarList.addFromString(grammar,1);
     recognition.grammars = speechrecognitiongrammarList;
-    recognition.lang = 'en-US';
     recognition.interimResults = false;
     document.querySelector('button').addEventListener('click', () => {
+        var lang=document.getElementById("lang").value;
+        recognition.lang = lang;
         recognition.start();
     });   
     recognition.addEventListener('result', (e) => {
