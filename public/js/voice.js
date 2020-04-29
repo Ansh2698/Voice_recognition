@@ -24,8 +24,21 @@ $(document).ready(function(){
         let last = e.results.length - 1;
         let text = e.results[last][0].transcript;
         document.querySelector(".output-you").textContent=text;
+        socket.emit("message",text,function(){
+            console.log("Message has been successfully send");
+        })
     });   
     recognition.addEventListener('speechend', () => {
         recognition.stop();
     });
+    function Utter_the_text(text){
+        const synth = window.speechSynthesis;
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.text = text;
+        synth.speak(utterance);
+    }
+    socket.on("response",function(Response){
+        Utter_the_text(Response);
+        document.querySelector(".response").textContent=Response;
+    })
 })
