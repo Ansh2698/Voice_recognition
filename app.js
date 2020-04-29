@@ -5,7 +5,10 @@ var ejs=require("ejs");
 var app= express();
 var container=require("./container");
 var socketIO=require("socket.io");
-var apiai = require('apiai')("dfd3abaf34eb4f6a923e2cf9369a238c");
+require('dotenv').config();
+var Token=process.env.TOKEN;
+var SESSION_ID=process.env.SESSION_ID;
+var apiai = require('apiai')(Token);
 const PORT=process.env.PORT || 8080;
 container.resolve(function(users){
     var app=SetExpress();
@@ -17,7 +20,7 @@ container.resolve(function(users){
             console.log("server is running on port "+PORT);
         })
         Configure(app);
-        require('./socket/voice-recog')(io,apiai);
+        require('./socket/voice-recog')(io,apiai,SESSION_ID);
         var router=require("express-promise-router")();
         users.SetRouting(router);
         app.use(router);

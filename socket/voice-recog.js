@@ -1,4 +1,4 @@
-module.exports=function(io,apiai){
+module.exports=function(io,apiai,sessionId){
     io.on("connection",function(socket){
         socket.on("join",function(data,callback){
             socket.join(data);
@@ -6,7 +6,7 @@ module.exports=function(io,apiai){
         })
         socket.on("message",function(data,callback){
             var request = apiai.textRequest(data, {
-                sessionId: 'ansh-pptdon'
+                sessionId: sessionId
             });
             request.on('response', function(response) {
                 var Aitext=response.result.fulfillment.speech;
